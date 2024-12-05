@@ -1,0 +1,42 @@
+
+
+.gardens-page h1{
+    text-align: center;
+    padding: 1rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-blanco-background);
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    text-decoration: underline var(--color-dorado-especial);
+}
+
+
+.gardens-page .region-selector{
+    display: flex;
+    justify-content: space-around;
+}
+
+.gardens-page .region-selector button{
+    background-color: var(--color-blanco-background);
+    color: var(--color-violeta-blue);
+    padding: .5rem;
+    border-radius: .5rem;
+    font-weight: 700;
+    border: 2px solid white;
+}
+
+.gardens-page .region-selector button:hover{
+    transition: all .6s;
+    color: var(--color-blanco-background);
+    background-color: var(--color-violeta-blue);
+    
+}
+
+
+
+.gardens-page .gardens-container{
+    padding-top: 2rem;
+    justify-content: center;
+    display: flex;
+}

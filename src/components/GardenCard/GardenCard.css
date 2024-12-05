@@ -1,0 +1,37 @@
+
+
+.garden-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 300px;
+    margin: 1rem;
+    border-radius: 1rem;
+    border: 1px solid;
+    padding: 1rem;
+    background-color: var(--color-blanco-background);
+}
+
+.garden-card h3{
+    font-size: 1.4rem;
+}
+
+
+.garden-card img{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.garden-card a{
+    text-decoration: underline var(--color-violeta-secundario);
+}
+
+.garden-card .buttonCard{
+    background-color: var(--color-azul-claro-secundario);
+    color: var(--color-blanco-background);
+    padding: .5rem;
+    margin: 1rem;
+    font-weight: 700;
+}

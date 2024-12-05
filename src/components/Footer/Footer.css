@@ -1,0 +1,66 @@
+footer {
+    background-color: var(--color-blanco-background); 
+    color: #000; 
+    padding: 20px; 
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+}
+
+.footer-parts {
+    margin: 20px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.frase-footer {
+    margin-top: 30px;
+}
+
+.footer-copyright {
+    margin-top: 20px;
+}
+
+footer .titulo-footer {
+    display: block;
+}
+
+footer .footer-parts {
+    margin-bottom: 1rem;
+    margin-top: .5rem;
+}
+.footer-parts a {
+    text-decoration: none;
+    color: var(--color-violeta-blue);
+    margin-left: .5rem;
+}
+.footer-parts a:hover{
+    color: var(--color-violeta-opaco);
+    text-decoration: underline;
+}
+
+.footer-parts .ul-footer{
+    list-style: none;
+}
+
+.footer-parts .social-media a svg {
+    cursor: pointer;
+    font-size: 30px;
+    margin-left: .5rem;
+    margin-right: .5rem;
+    transition: all .5s; 
+}
+
+.footer-parts .social-media a svg:hover {
+    transform: scale(1.1); 
+}
+.footer-parts .social-media{
+    margin-top: .5rem;
+}
+.footer-icons.social-media a.instagram svg {
+    color: #8134AF; 
+}
