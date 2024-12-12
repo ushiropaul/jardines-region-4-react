@@ -11,18 +11,22 @@ import './App.css';
 
 function App() {
   return (
-    <>
+    <div className='main'>
       <AuthProvider>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+
+          {/* aca en un futuro va a estar el protectedroute */}
+            <Route path="/" element={<Home />} />
+            <Route path="/gardens" element={<GardensPage />} />
+          {/* aca en un futuro va a estar el protectedroute */}
+
           <Route path="/auth" element={<AuthForm />} />
-          <Route path='/registrarse' element={<RegisForm />}/>
-          <Route path="/gardens" element={<GardensPage />} /> 
+          <Route path='/registrarse' element={<RegisForm />}/> 
         </Routes>
         <Footer />
       </AuthProvider>
-    </>
+    </div>
   );
 }
 

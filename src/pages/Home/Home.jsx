@@ -2,10 +2,22 @@
 import './Home.css';
 import DistrictGardenSelect from '../../components/DistrictGardenSelect/DistrictGardenSelect';
 import TeachingTools from '../../components/TeachingTools/TeachingTools';
-
+import { useAuth } from '../../context/AuthContext';
+import { Navigate } from 'react-router-dom';
 
 function Home() {
 
+  const { logout, user } = useAuth();
+
+  console.log(user);
+  const handleLogout = async () => {
+    try {
+      await logout();
+      Navigate('/registrarse')
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
 
   return (

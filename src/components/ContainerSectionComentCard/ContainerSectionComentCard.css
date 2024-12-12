@@ -1,0 +1,14 @@
+
+
+
+
+.errorMessage {
+    
+    color: red;
+}
+
+
+.errorMessage a{
+    text-decoration: underline var(--color-azul-claro-secundario);
+    color: var(--color-azul-claro-secundario);
+}
