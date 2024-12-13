@@ -15,6 +15,9 @@
 .gardens-page .region-selector{
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
+    gap: .5rem;
+    align-items: center;
 }
 
 .gardens-page .region-selector button{

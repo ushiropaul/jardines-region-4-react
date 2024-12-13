@@ -12,6 +12,7 @@
     resize: none;
     padding: .5rem;
     background-color: var(--color-celeste-suave);
+    height: 100px;
 }
 
 
@@ -19,6 +20,7 @@
     display: flex;
     gap: 1rem;
     width: 100%;
+    flex-wrap: wrap;
     justify-content: space-evenly;
 }
 

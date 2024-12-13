@@ -40,3 +40,9 @@
     background-color: var(--color-celeste-suave);
     color: #000;
 }
+
+@media (max-width:768px) {
+    .containerTTools .DivlinkTools a{
+        width: 90%;
+    }
+}

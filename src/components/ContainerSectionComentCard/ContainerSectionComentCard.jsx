@@ -66,7 +66,7 @@ function ContainerSectionComentCard({ gardenID, onClose }) {
                 <textarea
                     value={newComment}
                     onChange={(e) => setNewComment(e.target.value)}
-                    placeholder="Escribe tu comentario"
+                    placeholder="Explique su opinión sobre el jardín detalladamente."
                     required
                 ></textarea>
 

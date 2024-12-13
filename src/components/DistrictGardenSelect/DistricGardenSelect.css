@@ -47,3 +47,9 @@
     text-decoration: underline white;
 }
 
+@media (max-width:768px) {
+    .DistrictGardenCardsContainer .DistrictCardGardenSelect  p{
+        font-size: 1rem;
+    }
+    
+}
