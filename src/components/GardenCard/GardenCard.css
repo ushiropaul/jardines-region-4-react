@@ -82,7 +82,9 @@
     color: red;
 }
 
-
+.garden-card div h3{
+    text-align: center;
+}
 
 .garden-card div span {
     font-size: 0.9em;

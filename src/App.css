@@ -19,9 +19,10 @@ p, span, button, input, a {
     --color-violeta-opaco: #54426B;
     --color-azul-claro:#0081AF;
     --color-azul-oscuro:#09478f;
-    --color-azul-claro-secundario: rgb(6, 157, 212);
+    --color-azul-claro-secundario: #069dd4;
     --color-blanco-background:#eef4f9;
     --color-dorado-especial:#FFB140;
+    --color-celeste-suave:#dcecf9;
 }
 
 body{

@@ -1,0 +1,26 @@
+
+
+
+.home .divTitleApp{
+    text-align: center;
+    margin: 0 .5rem 0 .5rem;
+    padding-top: 1rem;
+}
+
+.home .componentsHome{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@media (max-width:768px){
+    .home .divTitleApp h1{
+        font-size: 1.3rem;
+    }
+    .home .divTitleApp p{
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,42 @@
+
+
+.containerTTools{
+    background-color: var(--color-azul-claro-secundario);
+    color: white;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    padding: 1rem;
+    box-shadow: 0 0 10px 0 var(--color-celeste-suave);
+}
+
+.containerTTools div{
+    text-align: center;
+}
+
+.containerTTools div h2{
+    color: var(--color-dorado-especial);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.containerTTools .DivlinkTools{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-direction: column;
+    padding: .5rem;
+}
+
+.containerTTools .DivlinkTools a{
+    background-color: var(--color-azul-oscuro);
+    padding: .5rem;
+    border-radius: .8rem;
+    width: 60%;
+}
+.containerTTools .DivlinkTools a:hover{
+    transition: all .2s;
+    background-color: var(--color-celeste-suave);
+    color: #000;
+}

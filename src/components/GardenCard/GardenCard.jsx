@@ -45,9 +45,8 @@ function GardenCard({ garden }) {
                 <div>
                     <h3>
                         Jardín {garden.gardenNumber}{" "}
-                        
                     </h3>
-                    <span>{averageRating ? `(${averageRating} estrellas)` : ""}</span>
+                    <span>{averageRating ? `Calificación: ${averageRating} de promedio` : ""}</span>
                 </div>
                 <p><strong>Distrito:</strong> {garden.gardenDistrict}</p>
                 <p><strong>Región:</strong> {garden.region}</p>

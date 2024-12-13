@@ -1,0 +1,14 @@
+.section-coment-card{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin: .5rem;
+    background-color: rgba(95, 167, 222, 0.755);
+    height: 250px; /* Establece el alto fijo deseado */
+    overflow-y: auto; /* Habilita el scroll vertical */
+    box-sizing: border-box; /* Incluye padding y bordes en el cálculo del alto */
+    
+}
+
+

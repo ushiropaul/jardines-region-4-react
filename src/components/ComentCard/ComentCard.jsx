@@ -8,8 +8,7 @@ function ComentCard({ comment }) {
     return (
         <div className="coment-card">
             <h4>
-                
-                {comment.isAnonymous ? "Anónimo" : comment.username} - {comment.rating} ⭐
+                {comment.isAnonymous ? "Anónimo" : comment.username} - Calificación: {comment.rating} ⭐
             </h4>
             <p>{comment.content}</p>
         </div>

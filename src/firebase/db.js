@@ -1,6 +1,6 @@
 // src/firebase/db.js
 
-import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs, deleteDoc  } from "firebase/firestore";
 import { db, auth } from "./config";
 
 // Obtener todos los jardines
@@ -49,4 +49,15 @@ export const addComment = async ({ gardenID, content, rating, isAnonymous }) => 
 
     // Agregar el comentario a Firestore
     await addDoc(collection(db, "calificationGarden"), commentData);
+};
+
+
+// Eliminar un comentario
+export const deleteComment = async (commentID) => {
+    try {
+        const commentRef = doc(db, "calificationGarden", commentID);
+        await deleteDoc(commentRef);
+    } catch (error) {
+        throw new Error("Error al eliminar el comentario: " + error.message);
+    }
 };

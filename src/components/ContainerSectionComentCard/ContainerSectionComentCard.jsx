@@ -46,9 +46,7 @@ function ContainerSectionComentCard({ gardenID, onClose }) {
         } catch (error) {
             if (error.message === "Usuario no autenticado") {
                 setErrorMessage(
-                    <>
                         <p className="errorMessage">Debés estar registrado/a para poder comentar: <Link to="/registrarse">Registrarse</Link></p>
-                    </>
                 );
             } else {
                 setErrorMessage("Ocurrió un error al enviar el comentario. Inténtalo nuevamente.");
@@ -59,7 +57,11 @@ function ContainerSectionComentCard({ gardenID, onClose }) {
     return (
         <div className="container-section-coment-card">
             <button className="close-button" onClick={onClose}></button>
+
+
             <SectionComentCard comments={comments} />
+
+
             <form onSubmit={handleSubmit} className="comment-form">
                 <textarea
                     value={newComment}
@@ -67,11 +69,12 @@ function ContainerSectionComentCard({ gardenID, onClose }) {
                     placeholder="Escribe tu comentario"
                     required
                 ></textarea>
+
                 <div className="form-controls">
                     <select value={rating} onChange={(e) => setRating(e.target.value)}>
                         {[1, 2, 3, 4, 5].map((star) => (
                             <option key={star} value={star}>
-                                {star} Estrella{star > 1 ? "s" : ""}
+                                {star} Estrella{star > 1 ? "s" : ""} ⭐
                             </option>
                         ))}
                     </select>
@@ -84,6 +87,7 @@ function ContainerSectionComentCard({ gardenID, onClose }) {
                         Comentar como anónimo
                     </label>
                 </div>
+
                 <button type="submit">Enviar</button>
             </form>
             {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Muestra mensaje de error */}
