@@ -1,52 +1,66 @@
-// src/context/AuthContext.jsx
-
-
-import { createContext, useContext } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 import { auth } from "../firebase/config";
 
-// Crear contexto de autenticación
 const authContext = createContext();
 
-// Hook para usar el contexto de autenticación
 export const useAuth = () => {
-    const context = useContext(authContext);
-    if (!context) {
-        throw new Error("useAuth debe ser usado dentro de un AuthProvider");
-    }
-    return context;
+  const context = useContext(authContext);
+  if (!context) throw new Error("There is no Auth provider");
+  return context;
 };
 
-// Proveedor de autenticación
 export function AuthProvider({ children }) {
-    // Registro de usuario
-    const signup = async (email, password, FirstName, LastName) => {
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            console.log("Usuario registrado:", userCredential.user);
-        } catch (error) {
-            console.error("Error al registrarse:", error.message);
-            throw error; // Propaga el error para manejarlo en el formulario
-        }
-    };
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    // Inicio de sesión
-    const login = async (email, password) => {
-        try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            console.log("Usuario autenticado:", userCredential.user);
-        } catch (error) {
-            console.error("Error al iniciar sesión:", error.message);
-            throw error; // Propaga el error para manejarlo en el formulario
-        }
-    };
+  const signup = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
 
-    return (
-        <authContext.Provider value={{ signup, login }}>
-            {children}
-        </authContext.Provider>
-    );
+  const login = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const loginWithGoogle = () => {
+    const googleProvider = new GoogleAuthProvider();
+    return signInWithPopup(auth, googleProvider);
+  };
+
+  const logout = () => signOut(auth);
+
+  const resetPassword = async (email) => sendPasswordResetEmail(auth, email);
+
+  useEffect(() => {
+    const unsubuscribe = onAuthStateChanged(auth, (currentUser) => {
+      console.log({ currentUser });
+      setUser(currentUser);
+      setLoading(false);
+    });
+    return () => unsubuscribe();
+  }, []);
+
+  return (
+    <authContext.Provider
+      value={{
+        signup,
+        login,
+        user,
+        logout,
+        loading,
+        loginWithGoogle,
+        resetPassword,
+      }}
+    >
+      {children}
+    </authContext.Provider>
+  );
 }
-
-
-export default authContext;
