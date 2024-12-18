@@ -21,11 +21,13 @@
     font-weight: 700;
     font-size: 1.4rem;
     color: var(--color-violeta-blue);
+    transition: all .5s;
+    text-decoration: underline rgb(4, 92, 255);
 }
 
 .DistrictGardenCardsContainer .DistrictCardGardenSelect:hover{
     transition: all .5s;
-    background-color: #5b358d;
+    background-color: #a35cff;
     color: var(--color-blanco-background);
 }
 
@@ -37,15 +39,7 @@
 }
 
 
-.DistrictGardenCardsContainer .DistrictCardGardenSelect  p{
-    padding: 1rem;
-    text-decoration: underline var(--color-violeta-blue);
-}
 
-
-.DistrictGardenCardsContainer .DistrictCardGardenSelect  p:hover{
-    text-decoration: underline white;
-}
 
 @media (max-width:768px) {
     .DistrictGardenCardsContainer .DistrictCardGardenSelect  p{

@@ -7,21 +7,12 @@
     padding: 1rem;
 }
 
-.auth-form h2{
-    padding: 1rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-align: center;
-}
 
 .auth-form p{
     text-align: center;
 }
 
-.auth-form p a{
-    color: var(--color-azul-oscuro);
-    text-decoration: underline var(--color-azul-oscuro);
-}
+
 
 .auth-form form{
     margin: 2rem;
@@ -33,20 +24,23 @@
     align-items: center;
 }
 
-.auth-form button{
-    background-color: #c5ced6;
-    padding: .6rem;
-    max-width: 400px;
-    border: 2px solid #c5ced6;
-}
-.auth-form button:hover{
-    transition: all .4s;
-    background-color: #8fc1ec;
-    border: 2px solid #58aaf2;
+.auth-form form div{
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    align-items: center;
 }
 
 
 
+
+.logInWithGoogle{
+    padding: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
 
 
 @media (min-width: 610px) {

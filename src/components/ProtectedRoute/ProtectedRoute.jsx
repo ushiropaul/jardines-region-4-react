@@ -6,7 +6,7 @@ export function ProtectedRoute({ children }) {
 
   if (loading) return <h1>CARGANDO...</h1>;
 
-  if (!user) return <Navigate to="/auth" />;
+  if (!user) return <Navigate to="/registrarse" />;
 
   return <>{children}</>;
 }
