@@ -1,7 +1,5 @@
-
-// Register.js
 import { useState } from "react";
-import { useAuth } from "./../../context/AuthContext.jsx";
+import { useAuth } from "../../context/AuthContext.jsx";
 import './RegisForm.css';
 import { Link, useNavigate } from "react-router-dom";
 import Alert from "../../components/Alert/Alert";
@@ -12,9 +10,12 @@ function Register() {
   const [user, setUser] = useState({
     email: "",
     password: "",
+    firstName: "",
+    lastName: "",
   });
 
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState(""); // Nuevo estado para mensajes de éxito
   const navigate = useNavigate();
 
   const translateError = (errorCode) => {
@@ -33,9 +34,13 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setSuccessMessage("");
     try {
-      await signup(user.email, user.password);
-      navigate("/");
+      const fullName = `${user.firstName} ${user.lastName}`;
+      await signup(user.email, user.password, fullName);
+      setSuccessMessage(
+        "Registro exitoso. Por favor, verifica tu correo electrónico antes de iniciar sesión."
+      );
     } catch (error) {
       setError(translateError(error.code));
     }
@@ -45,6 +50,7 @@ function Register() {
     <div className="regis-form">
       <h1>¡Creá tu cuenta y descubrí todos los jardines de región 4!</h1>
       {error && <Alert message={error} />}
+      {successMessage && <Alert message={successMessage} type="success" />}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <input
@@ -52,6 +58,7 @@ function Register() {
             type="text"
             name="firstName"
             id="firstName"
+            onChange={(e) => setUser({ ...user, firstName: e.target.value })}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
           <input
@@ -59,6 +66,7 @@ function Register() {
             type="text"
             name="lastName"
             id="lastName"
+            onChange={(e) => setUser({ ...user, lastName: e.target.value })}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
@@ -92,6 +100,4 @@ function Register() {
 }
 
 export default Register;
-
-
 
