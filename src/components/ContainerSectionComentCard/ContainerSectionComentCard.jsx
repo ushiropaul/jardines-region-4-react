@@ -37,7 +37,7 @@ function ContainerSectionComentCard({ gardenID, onClose }) {
 
         const commentData = {
             gardenID,
-            fullName: isAnonymous ? "Anónimo" : user.fullName,
+            fullName: isAnonymous ? "Anónimo" : user.displayName,
             email: isAnonymous ? "anonimo@example.com" : user.email,
             content: newComment,
             rating,

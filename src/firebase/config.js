@@ -11,7 +11,7 @@ const firebaseConfig = {
     apiKey: "AIzaSyDkwR6Jk7FWVwoLCHJL2MHD5mQqB82DAjQ",
     authDomain: "jardines-region-4.firebaseapp.com",
     projectId: "jardines-region-4",
-    storageBucket: "jardines-region-4.firebasestorage.app",
+    storageBucket: "jardines-region-4.appspot.com",
     messagingSenderId: "602783756337",
     appId: "1:602783756337:web:0b6d056b507f7387666510",
     measurementId: "G-C3NF51VYE7"

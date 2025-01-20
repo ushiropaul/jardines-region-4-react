@@ -1,6 +1,4 @@
-// src/firebase/db.js
-
-import { collection, addDoc, query, where, getDocs, deleteDoc  } from "firebase/firestore";
+import { collection, addDoc, query, where, getDocs, deleteDoc, doc, setDoc } from "firebase/firestore";
 import { db, auth } from "./config";
 
 // Obtener todos los jardines
@@ -32,8 +30,7 @@ export const addComment = async ({ gardenID, content, rating, isAnonymous }) => 
     const user = auth.currentUser;
     if (!user) throw new Error("Usuario no autenticado");
 
-    // Asegurarse de que rating sea un número válido y esté en el rango (1-5)
-    const ratingNumber = Number(rating);  // Convertir a número
+    const ratingNumber = Number(rating); // Convertir a número
     if (isNaN(ratingNumber) || ratingNumber < 1 || ratingNumber > 5) {
         throw new Error("El rating debe ser un número entre 1 y 5.");
     }
@@ -41,16 +38,14 @@ export const addComment = async ({ gardenID, content, rating, isAnonymous }) => 
     const commentData = {
         gardenID,
         content,
-        rating: ratingNumber, // Guardar rating como número
+        rating: ratingNumber,
         isAnonymous,
         username: isAnonymous ? "Anónimo" : user.displayName || user.email,
         createdAt: new Date().toISOString(),
     };
 
-    // Agregar el comentario a Firestore
     await addDoc(collection(db, "calificationGarden"), commentData);
 };
-
 
 // Eliminar un comentario
 export const deleteComment = async (commentID) => {
@@ -59,5 +54,15 @@ export const deleteComment = async (commentID) => {
         await deleteDoc(commentRef);
     } catch (error) {
         throw new Error("Error al eliminar el comentario: " + error.message);
+    }
+};
+
+// Guardar datos adicionales del usuario en usersData
+export const saveUserData = async (uid, userData) => {
+    try {
+        const userRef = doc(db, "usersData", uid);
+        await setDoc(userRef, userData);
+    } catch (error) {
+        throw new Error("Error al guardar datos adicionales del usuario: " + error.message);
     }
 };

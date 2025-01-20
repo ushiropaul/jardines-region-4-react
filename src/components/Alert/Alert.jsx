@@ -17,7 +17,7 @@ function Alert({ message, onConfirm, onCancel, showActions = false }) {
   if (!isVisible) return null;
 
   return (
-    <div className="Alert bg-blue-300 border border-blue-400 text-black-700 rounded relative text-center" role="alert">
+    <div className="Alert bg-blue-300 border border-blue-400 text-black-700 rounded absolute text-center" role="alert">
       <span className="">{message}</span>
       {showActions && (
         <div className=" confirmLogOutAlert">

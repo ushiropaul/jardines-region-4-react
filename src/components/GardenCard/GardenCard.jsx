@@ -1,60 +1,79 @@
-// src/components/GardenCard/GardenCard.jsx
+// gardenCard
+
+
 import React, { useState, useEffect } from "react";
 import ContainerSectionComentCard from "../ContainerSectionComentCard/ContainerSectionComentCard";
 import { getComments } from "../../firebase/db";
 import "./GardenCard.css";
 
-function GardenCard({ garden }) {
+function GardenCard({ garden, onUpdateData }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [averageRating, setAverageRating] = useState(null);
+    const [commentsCount, setCommentsCount] = useState(garden.commentsCount || 0);
+    const [averageRating, setAverageRating] = useState(garden.averageRating || 0);
 
     useEffect(() => {
-        // Obtener comentarios y calcular promedio de ratings válidos
-        const fetchAndCalculateAverage = async () => {
+        const fetchAndCalculateData = async () => {
             const comments = await getComments(garden.id);
-
-            if (comments.length > 0) {
-                // Filtrar valores válidos (entre 1 y 5)
-                const validRatings = comments
-                    .map(comment => comment.rating)
-                    .filter(rating => rating >= 1 && rating <= 5);
-
-                if (validRatings.length > 0) {
-                    // Calcular el promedio normalizado
-                    const totalRating = validRatings.reduce((sum, rating) => sum + rating, 0);
-                    const average = totalRating / validRatings.length;
-
-                    // Redondear y limitar el rango entre 1 y 5
-                    const normalizedAverage = Math.min(5, Math.max(1, average));
-                    setAverageRating(normalizedAverage.toFixed(1)); // Redondear a 1 decimal
-                } else {
-                    setAverageRating("Sin ratings");
-                }
-            } else {
-                setAverageRating("Sin ratings");
+    
+            const validRatings = comments
+                .map((comment) => comment.rating)
+                .filter((rating) => rating >= 1 && rating <= 5);
+    
+            const newCommentsCount = comments.length;
+            const newAverageRating =
+                validRatings.length > 0
+                    ? parseFloat(
+                          (validRatings.reduce((sum, rating) => sum + rating, 0) / validRatings.length).toFixed(1)
+                      )
+                    : 0;
+    
+            // Solo actualiza si los datos han cambiado
+            if (
+                newCommentsCount !== commentsCount ||
+                newAverageRating !== averageRating
+            ) {
+                setCommentsCount(newCommentsCount);
+                setAverageRating(newAverageRating);
+    
+                // Actualiza el componente padre solo si hay cambios
+                onUpdateData({
+                    id: garden.id,
+                    commentsCount: newCommentsCount,
+                    averageRating: newAverageRating,
+                });
             }
         };
-
-        fetchAndCalculateAverage();
-    }, [garden.id]);
+    
+        fetchAndCalculateData();
+    }, [garden.id]); // Nota: No necesitas incluir `onUpdateData` en las dependencias aquí.
+    
 
     return (
         <>
             <div className="garden-card">
                 <img src={garden.gardenImg} alt="" />
                 <div>
-                    <h3>
-                        Jardín {garden.gardenNumber}{" "}
-                    </h3>
-                    <span>{averageRating ? `Calificación: ${averageRating} de promedio` : ""}</span>
+                    <h3>Jardín {garden.gardenNumber}</h3>
+                    <p>{commentsCount > 0 ? `${commentsCount} comentarios` : "Sin comentarios"}</p>
+                    <span>Promedio: {averageRating || "Sin calificaciones"}</span>
                 </div>
-                <p><strong>Distrito:</strong> {garden.gardenDistrict}</p>
-                <p><strong>Región:</strong> {garden.region}</p>
-                <p><strong>Teléfono:</strong> {garden.gardenCelNum}</p>
+                <p>
+                    <strong>Distrito:</strong> {garden.gardenDistrict}
+                </p>
+                <p>
+                    <strong>Región:</strong> {garden.region}
+                </p>
+                <p>
+                    <strong>Teléfono:</strong> {garden.gardenCelNum}
+                </p>
                 <a target="_blank" href={`${garden.gardenDirectionLink}`} rel="noopener noreferrer">
-                    <p><strong>Dirección:</strong> {garden.gardenDirection}</p>
+                    <p>
+                        <strong>Dirección:</strong> {garden.gardenDirection}
+                    </p>
                 </a>
-                <button className="buttonCard" onClick={() => setIsModalOpen(true)}>Comentar</button>
+                <button className="buttonCard" onClick={() => setIsModalOpen(true)}>
+                    Comentar
+                </button>
             </div>
 
             {isModalOpen && (

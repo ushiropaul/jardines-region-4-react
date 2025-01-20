@@ -9,8 +9,8 @@ import {
   sendEmailVerification, // Importar esta función
 } from "firebase/auth";
 import { auth } from "../firebase/config";
+import { saveUserData } from "../firebase/db"; // Importar la función para guardar datos adicionales
 import React, { createContext, useContext, useEffect, useState } from "react";
-
 
 const authContext = createContext();
 
@@ -24,9 +24,15 @@ export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const signup = async (email, password) => {
+  const signup = async (email, password, firstName, lastName) => {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    await sendEmailVerification(userCredential.user); // Enviar correo de verificación
+    const { user } = userCredential;
+
+    await sendEmailVerification(user); // Enviar correo de verificación
+
+    // Guardar datos adicionales en la colección usersData
+    await saveUserData(user.uid, { firstName, lastName, email });
+
     return userCredential;
   };
 

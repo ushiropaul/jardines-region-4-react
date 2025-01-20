@@ -13,16 +13,22 @@
     align-items: center;
 }
 
-.buttonLogOut{
+
+.SubHeader a{
     display: flex;
-    gap: .5rem;
+    gap: .3rem;
     align-items: center;
+    justify-content: center;
+    background-color: var(--color-celeste-suave);
+    padding: .5rem;
+    border-radius: 1rem;
+    transition: all .3s;
 }
 
-.buttonMyAccount{
-    display: flex;
-    gap: .5rem;
-    align-items: center;
+.SubHeader a:hover{
+    transition: all .3s;
+    background-color: var(--color-azul-claro-secundario);
+    color: white;
 }
 
 

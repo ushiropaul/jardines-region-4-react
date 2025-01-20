@@ -8,6 +8,7 @@ import Register from './pages/RegisForm/RegisForm';
 import GardensPage from "./pages/GardensPage/GardensPage";
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
+import MyAccount from './pages/MyAccount/MyAccount';
 import './App.css';
 
 function App() {
@@ -25,6 +26,16 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path='/mi-cuenta'
+              element={
+                <ProtectedRoute>
+                  <MyAccount/>
+                </ProtectedRoute>
+              }
+            >
+
+            </Route>
             <Route
               path='/gardens'
               element={

@@ -1,0 +1,113 @@
+
+
+
+.mainAccount{
+    width: 100%;
+}
+.mainAccount .headerAccount {
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-azul-oscuro);
+    max-height: 300px;
+
+}
+
+
+.mainAccount {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.headerAccount {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.accountDetails {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.formField {
+    margin-bottom: 15px;
+    margin: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.formField label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    margin-right: .3rem;
+}
+
+.formField p{
+    font-size: 16px;
+}
+.formField input {
+    font-size: 16px;
+    border:1px solid ;
+}
+
+.formActions {
+    margin-top: 20px;
+}
+
+.formActions button {
+    padding: 10px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.formActions button:hover {
+    background-color: #0056b3;
+}
+
+
+
+.profileImage {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-top: 10px;
+}
+
+.deleteBtn {
+    background-color: red;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.deleteBtn:hover {
+    background-color: darkred;
+}
+
+
+.optionButtons{
+    display: flex;
+    flex-wrap: wrap;
+    gap: .3rem;
+}
+
+.optionButtons button{
+    border: 1px solid;
+    border-radius: 1rem;
+    padding: .3rem;
+
+}
+

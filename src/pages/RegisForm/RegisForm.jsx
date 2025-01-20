@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext.jsx";
 import './RegisForm.css';
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Alert from "../../components/Alert/Alert";
 
 function Register() {
@@ -15,8 +15,7 @@ function Register() {
   });
 
   const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState(""); // Nuevo estado para mensajes de éxito
-  const navigate = useNavigate();
+  const [successMessage, setSuccessMessage] = useState("");
 
   const translateError = (errorCode) => {
     switch (errorCode) {
@@ -36,8 +35,7 @@ function Register() {
     setError("");
     setSuccessMessage("");
     try {
-      const fullName = `${user.firstName} ${user.lastName}`;
-      await signup(user.email, user.password, fullName);
+      await signup(user.email, user.password, user.firstName, user.lastName);
       setSuccessMessage(
         "Registro exitoso. Por favor, verifica tu correo electrónico antes de iniciar sesión."
       );
@@ -100,4 +98,3 @@ function Register() {
 }
 
 export default Register;
-

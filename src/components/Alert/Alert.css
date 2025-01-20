@@ -6,5 +6,10 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    position: absolute; /* Hace que el elemento sea posicionado relativo a su contenedor */
+    top: 50%;           /* Mueve el div al 50% desde la parte superior */
+    left: 50%;          /* Mueve el div al 50% desde el lado izquierdo */
+    transform: translate(-50%, -50%);
+
 }
 

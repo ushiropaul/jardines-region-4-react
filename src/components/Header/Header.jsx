@@ -18,6 +18,9 @@ function Header() {
                 <Link to="/">Inicio</Link>
             </li>
             <li>
+                <Link to="/gardens">Ver jardines</Link>
+            </li>
+            <li>
                 <Link to='/registrarse'>Registrarse</Link>
             </li>
             </ul>
