@@ -9,6 +9,7 @@ import GardensPage from "./pages/GardensPage/GardensPage";
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute/ProtectedRoute';
 import MyAccount from './pages/MyAccount/MyAccount';
+import MarketPlace from './pages/MarketPlace/MarketPlace';
 import './App.css';
 
 function App() {
@@ -41,6 +42,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <GardensPage/>
+                </ProtectedRoute>
+              }
+            ></Route>
+
+            <Route
+              path='/marketplace'
+              element={
+                <ProtectedRoute>
+                  <MarketPlace/>
                 </ProtectedRoute>
               }
             ></Route>

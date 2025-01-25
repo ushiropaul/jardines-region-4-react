@@ -63,3 +63,106 @@
     background-color: rgb(177, 217, 252);
     margin: .5rem;
 }
+
+
+.range-stars-filter{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    gap: .5rem;
+    justify-content: center;
+
+
+}
+
+.range-stars-filter label{
+    border: 1px solid;
+    padding: .3rem;
+    display: flex;
+    gap: .1rem;
+    background-color: aliceblue;
+    text-align: center;
+    align-items: center;
+}
+
+.range-stars-filter label input[type="checkbox"] {
+    width: 1rem; /* Cambia el tamaño */
+    height: 1rem;
+    text-align: center;
+    cursor: pointer; /* Cambia el cursor al pasar sobre él */
+    accent-color: #4caf50; /* Cambia el color del check */
+    border: 2px solid #ccc; /* Borde personalizado */
+    border-radius: 4px; /* Hacer que el checkbox tenga esquinas redondeadas */
+}
+
+
+/* prueba */
+
+.hover-container {
+    position: relative; /* Necesario para posicionar el tooltip */
+    display: inline-block;
+    width: 100%;
+    margin: .5rem;
+}
+
+.hover-button {
+    padding: 10px 15px;
+    font-size: 14px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Tooltip oculto por defecto */
+.tooltip {
+    visibility: hidden; /* El tooltip está oculto */
+    opacity: 0; /* Transparente */
+    background-color: rgba(0, 0, 0, 0.75); /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 4px;
+    position: absolute; /* Posición flotante */
+    bottom: 125%; /* Aparece encima del botón */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translateX(-50%);
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 10;
+}
+
+/* Flecha debajo del tooltip */
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%; /* Flecha debajo del tooltip */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.75) transparent transparent transparent;
+}
+
+/* Mostrar tooltip al hacer hover */
+.hover-container:hover .tooltip {
+    visibility: visible; /* Muestra el tooltip */
+    opacity: 1; /* Hace visible el tooltip */
+}
+
+/* fin de prueba */
+
+
+@media (max-width: 380px) {
+    .filter-selector{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+        
+    }
+    .filter-selector button{
+        background-color: aliceblue;
+        padding: .3rem;
+    }
+}

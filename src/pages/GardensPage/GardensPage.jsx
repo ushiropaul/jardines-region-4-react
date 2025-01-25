@@ -1,41 +1,47 @@
-
-// gardenPage
-
-
 import React, { useEffect, useState } from "react";
-import { getGardens } from "./../../firebase/db";
+import { getGardens, getComments } from "./../../firebase/db";
 import GardenCard from "../../components/GardenCard/GardenCard";
+import SearchGardens from "../../components/SearchGardens/SearchGardens";
 import "./GardensPage.css";
-
 
 function GardensPage() {
     const [gardens, setGardens] = useState([]);
     const [gardensData, setGardensData] = useState([]);
     const [selectedRegion, setSelectedRegion] = useState("");
     const [filterBy, setFilterBy] = useState("none");
+    const [starFilters, setStarFilters] = useState([]);
+
+    const fetchGardensWithRatings = async () => {
+        const data = await getGardens();
+
+        // Agrega ratings y comentarios
+        const updatedData = await Promise.all(
+            data.map(async (garden) => {
+                const comments = await getComments(garden.id);
+
+                const validRatings = comments
+                    .map((comment) => comment.rating)
+                    .filter((rating) => rating >= 1 && rating <= 5);
+
+                return {
+                    ...garden,
+                    commentsCount: comments.length,
+                    averageRating: validRatings.length
+                        ? parseFloat(
+                              (validRatings.reduce((sum, rating) => sum + rating, 0) / validRatings.length).toFixed(1)
+                          )
+                        : 0,
+                };
+            })
+        );
+
+        setGardens(updatedData);
+        setGardensData(updatedData);
+    };
 
     useEffect(() => {
-        const fetchGardens = async () => {
-            const data = await getGardens();
-    
-            const initializedData = data.map((garden) => ({
-                ...garden,
-                commentsCount: garden.commentsCount || 0,
-                averageRating: garden.ratings && garden.ratings.length > 0
-                    ? garden.ratings.reduce((sum, rating) => sum + rating, 0) / garden.ratings.length
-                    : 0,
-            }));
-    
-            console.log("Datos iniciales de jardines:", initializedData);
-    
-            setGardens(initializedData);
-            setGardensData(initializedData);
-        };
-    
-        fetchGardens();
+        fetchGardensWithRatings();
     }, []);
-    
-    
 
     const handleRegionChange = (district) => {
         setSelectedRegion(district);
@@ -49,9 +55,9 @@ function GardensPage() {
 
     const handleFilterChange = (filterType) => {
         setFilterBy(filterType);
-    
-        let sortedGardens = [...gardensData]; // Copia del estado actual.
-    
+
+        let sortedGardens = [...gardensData];
+
         switch (filterType) {
             case "comments-desc":
                 sortedGardens.sort((a, b) => b.commentsCount - a.commentsCount);
@@ -59,43 +65,46 @@ function GardensPage() {
             case "comments-asc":
                 sortedGardens.sort((a, b) => a.commentsCount - b.commentsCount);
                 break;
-            case "rating-desc":
-                sortedGardens.sort((a, b) => b.averageRating - a.averageRating);
-                break;
-            case "rating-asc":
-                sortedGardens.sort((a, b) => a.averageRating - b.averageRating);
-                break;
             default:
-                sortedGardens = [...gardens]; // Restaurar a datos originales.
+                sortedGardens = [...gardens];
                 break;
         }
-    
-        console.log(`Jardines después de aplicar filtro (${filterType}):`, sortedGardens);
-    
-        setGardensData([...sortedGardens]); // Fuerza una nueva referencia para asegurar la re-renderización.
-    };
-    
-    
-    
 
-    const handleUpdateGardenData = (updatedData) => {
-        const updatedGardens = gardens.map((garden) =>
-            garden.id === updatedData.id
-                ? { ...garden, commentsCount: updatedData.commentsCount, averageRating: updatedData.averageRating }
-                : garden
-        );
-    
-        console.log("Datos actualizados:", updatedGardens);
-        setGardens(updatedGardens);
-        setGardensData(updatedGardens);
+        setGardensData(sortedGardens);
     };
-    
+
+    const handleStarFilterChange = (star) => {
+        const updatedFilters = starFilters.includes(star)
+            ? starFilters.filter((s) => s !== star) // Quita el filtro si ya está seleccionado
+            : [...starFilters, star]; // Agrega el filtro si no está seleccionado
+
+        setStarFilters(updatedFilters);
+
+        if (updatedFilters.length > 0) {
+            const filteredGardens = gardens.filter((garden) =>
+                updatedFilters.includes(Math.floor(garden.averageRating))
+            );
+            setGardensData(filteredGardens);
+        } else {
+            setGardensData(gardens);
+        }
+    };
+
+    const handleSearchResults = (filteredGardens) => {
+        setGardensData(filteredGardens);
+    };
 
     return (
         <div className="gardens-page">
             <h1>Jardines de Infantes</h1>
 
-            {/* Región */}
+            <div className="hover-container">
+                <SearchGardens className="hover-button" gardens={gardens} onSearchResults={handleSearchResults} />
+                <div className="tooltip">Podés buscar por número de jardín, por dirección, <br /> por promedio de calificación, por teléfono, etc...</div>
+            </div>
+        
+
+
             <div className="region-selector">
                 <button onClick={() => handleRegionChange("Quilmes")}>Quilmes</button>
                 <button onClick={() => handleRegionChange("Varela")}>Varela</button>
@@ -103,30 +112,28 @@ function GardensPage() {
                 <button onClick={() => handleRegionChange("")}>Todos</button>
             </div>
 
-            {/* Filtros */}
             <div className="filter-selector">
-                <button onClick={() => handleFilterChange("comments-asc")}>
-                    Más Comentarios
-                </button>
-                <button onClick={() => handleFilterChange("comments-desc")}>
-                    Menos Comentarios
-                </button>
-                <button onClick={() => handleFilterChange("rating-asc")}>
-                    Promedio (Mayor a Menor)
-                </button>
-                <button onClick={() => handleFilterChange("rating-desc")}>
-                    Promedio (Menor a Mayor)
-                </button>
+                <button onClick={() => handleFilterChange("comments-asc")}>Menos Comentarios</button>
+                <button onClick={() => handleFilterChange("comments-desc")}>Más Comentarios</button>
             </div>
 
-            {/* Jardines */}
+            <div className="range-stars-filter">
+                {[1, 2, 3, 4, 5].map((star) => (
+                    <label key={star}>
+                        <input
+                            type="checkbox"
+                            value={star}
+                            checked={starFilters.includes(star)}
+                            onChange={() => handleStarFilterChange(star)}
+                        />
+                        {star} estrella{star > 1 ? "s" : ""}
+                    </label>
+                ))}
+            </div>
+
             <div className="gardens-container">
                 {gardensData.map((garden) => (
-                    <GardenCard
-                        key={garden.id}
-                        garden={garden}
-                        onUpdateData={handleUpdateGardenData}
-                    />
+                    <GardenCard key={garden.id} garden={garden} />
                 ))}
             </div>
         </div>

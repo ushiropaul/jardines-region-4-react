@@ -1,52 +1,9 @@
-// gardenCard
-
-
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ContainerSectionComentCard from "../ContainerSectionComentCard/ContainerSectionComentCard";
-import { getComments } from "../../firebase/db";
 import "./GardenCard.css";
 
-function GardenCard({ garden, onUpdateData }) {
+function GardenCard({ garden }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [commentsCount, setCommentsCount] = useState(garden.commentsCount || 0);
-    const [averageRating, setAverageRating] = useState(garden.averageRating || 0);
-
-    useEffect(() => {
-        const fetchAndCalculateData = async () => {
-            const comments = await getComments(garden.id);
-    
-            const validRatings = comments
-                .map((comment) => comment.rating)
-                .filter((rating) => rating >= 1 && rating <= 5);
-    
-            const newCommentsCount = comments.length;
-            const newAverageRating =
-                validRatings.length > 0
-                    ? parseFloat(
-                          (validRatings.reduce((sum, rating) => sum + rating, 0) / validRatings.length).toFixed(1)
-                      )
-                    : 0;
-    
-            // Solo actualiza si los datos han cambiado
-            if (
-                newCommentsCount !== commentsCount ||
-                newAverageRating !== averageRating
-            ) {
-                setCommentsCount(newCommentsCount);
-                setAverageRating(newAverageRating);
-    
-                // Actualiza el componente padre solo si hay cambios
-                onUpdateData({
-                    id: garden.id,
-                    commentsCount: newCommentsCount,
-                    averageRating: newAverageRating,
-                });
-            }
-        };
-    
-        fetchAndCalculateData();
-    }, [garden.id]); // Nota: No necesitas incluir `onUpdateData` en las dependencias aquí.
-    
 
     return (
         <>
@@ -54,8 +11,8 @@ function GardenCard({ garden, onUpdateData }) {
                 <img src={garden.gardenImg} alt="" />
                 <div>
                     <h3>Jardín {garden.gardenNumber}</h3>
-                    <p>{commentsCount > 0 ? `${commentsCount} comentarios` : "Sin comentarios"}</p>
-                    <span>Promedio: {averageRating || "Sin calificaciones"}</span>
+                    <p>{garden.commentsCount > 0 ? `${garden.commentsCount} comentarios` : "Sin comentarios"}</p>
+                    <span>Promedio: {garden.averageRating || "Sin calificaciones"}</span>
                 </div>
                 <p>
                     <strong>Distrito:</strong> {garden.gardenDistrict}
@@ -82,10 +39,7 @@ function GardenCard({ garden, onUpdateData }) {
                         <button className="close-button" onClick={() => setIsModalOpen(false)}>
                             ✖
                         </button>
-                        <ContainerSectionComentCard
-                            gardenID={garden.id}
-                            onClose={() => setIsModalOpen(false)}
-                        />
+                        <ContainerSectionComentCard gardenID={garden.id} onClose={() => setIsModalOpen(false)} />
                     </div>
                 </div>
             )}

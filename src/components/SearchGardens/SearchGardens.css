@@ -1,0 +1,14 @@
+/* Buscador.css */
+
+.buscador {
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.buscador input {
+    width: 80%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

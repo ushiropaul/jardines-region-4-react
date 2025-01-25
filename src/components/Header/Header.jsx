@@ -21,6 +21,9 @@ function Header() {
                 <Link to="/gardens">Ver jardines</Link>
             </li>
             <li>
+                <Link to={"/marketplace"}>Marketplace</Link>
+            </li>
+            <li>
                 <Link to='/registrarse'>Registrarse</Link>
             </li>
             </ul>
