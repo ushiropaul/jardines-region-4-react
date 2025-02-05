@@ -20,9 +20,9 @@ function Header() {
             <li>
                 <Link to="/gardens">Ver jardines</Link>
             </li>
-            <li>
+            {/* <li>
                 <Link to={"/marketplace"}>Marketplace</Link>
-            </li>
+            </li> */}
             <li>
                 <Link to='/registrarse'>Registrarse</Link>
             </li>
