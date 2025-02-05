@@ -148,19 +148,6 @@ function MyAccount() {
                         <p>{lastName}</p>
                     )}
                 </div>
-                <div className="formField">
-                    <label>Categoría:</label>
-                    <select
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)}
-                        disabled={!isEditing}
-                    >
-                        <option value="">Selecciona tu categoría</option>
-                        <option value="madre">Madre</option>
-                        <option value="padre">Padre</option>
-                        <option value="docente de inicial">Docente de Inicial</option>
-                    </select>
-                </div>
                 <div className="formActions">
                     {isEditing ? (
                         <button onClick={handleSave}>Guardar</button>

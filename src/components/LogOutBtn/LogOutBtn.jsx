@@ -19,9 +19,9 @@ function LogOutBtn(){
         setShowAlert(false);
         try {
           await logout();
-          console.log("Sesión cerrada correctamente.");
+          // console.log("Sesión cerrada correctamente.");
         } catch (error) {
-          console.error("Error al cerrar sesión:", error);
+          // console.error("Error al cerrar sesión:", error);
         }
       };
     
