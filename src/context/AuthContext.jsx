@@ -9,7 +9,7 @@ import {
   sendEmailVerification, // Importar esta función
 } from "firebase/auth";
 import { auth } from "../firebase/config";
-import { saveUserData } from "../firebase/db"; // Importar la función para guardar datos adicionales
+import { saveUserData } from "../firebase/db";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 const authContext = createContext();

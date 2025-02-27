@@ -1,3 +1,4 @@
+// src/components/ContainerSectionComentCard/ContainerSectionComentCard.jsx
 import { useState, useEffect } from "react";
 import SectionComentCard from "../SectionComentCard/SectionComentCard";
 import { getComments, addComment } from "../../firebase/db";
@@ -6,7 +7,7 @@ import "./ContainerSectionComentCard.css";
 import { Link } from "react-router-dom";
 
 function ContainerSectionComentCard({ gardenID, onClose }) {
-    const { user } = useAuth(); // Acceso al usuario autenticado
+    const { user } = useAuth();
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
     const [rating, setRating] = useState(1);
@@ -28,8 +29,7 @@ function ContainerSectionComentCard({ gardenID, onClose }) {
         if (!user) {
             setErrorMessage(
                 <p className="errorMessage">
-                    Debés estar registrado/a para comentar:{" "}
-                    <Link to="/registrarse">Registrarse</Link>
+                    Debés estar registrado/a para comentar: <Link to="/registrarse">Registrarse</Link>
                 </p>
             );
             return;

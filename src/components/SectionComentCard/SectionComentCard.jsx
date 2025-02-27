@@ -1,7 +1,5 @@
 
-
 // src/components/SectionComentCard/SectionComentCard.jsx
-
 import React from "react";
 import ComentCard from "../ComentCard/ComentCard";
 import "./SectionComentCard.css";

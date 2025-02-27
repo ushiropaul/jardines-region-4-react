@@ -4,3 +4,93 @@
     border-radius: .5rem;
     
 }
+
+.coment-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: #fff;
+}
+
+
+.comment-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.reply-form {
+    margin-top: 1rem;
+    border-top: 1px solid #eee;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+
+
+.reply-form textarea {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.reply-form label{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    padding: .5rem;
+}
+
+.reply-form button{
+    background-color: #3d9cea;
+    padding: 1rem;
+    border-radius: .5rem;
+    color: #fff;
+    font-weight: 800;
+}
+
+
+.error-message {
+    color: #dc3545;
+    font-size: 0.9em;
+    margin-top: 0.5rem;
+}
+
+
+
+/* replies */
+.containerBtnsReplys{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    margin: 1rem 0;
+}
+
+.btnDoAReply{
+    background-color: #3d9cea;
+    color: white;
+    padding: .4rem;
+    border-radius: .5rem;
+}
+.btnShowReplys{
+    background-color: #3d9cea;
+    color: white;
+    padding: .4rem;
+    border-radius: .5rem;
+}
+
+
+.replies{
+    margin-top: 1rem;
+}
+
+.replies .reply{
+    background-color: #e4e4e4;
+    padding: .4rem;
+    border-radius: 1rem;
+    margin: .5rem 0;
+}
+

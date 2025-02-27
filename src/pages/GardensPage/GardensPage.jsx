@@ -13,16 +13,16 @@ function GardensPage() {
 
     const fetchGardensWithRatings = async () => {
         const data = await getGardens();
-
+    
         // Agrega ratings y comentarios
         const updatedData = await Promise.all(
             data.map(async (garden) => {
                 const comments = await getComments(garden.id);
-
+    
                 const validRatings = comments
                     .map((comment) => comment.rating)
                     .filter((rating) => rating >= 1 && rating <= 5);
-
+    
                 return {
                     ...garden,
                     commentsCount: comments.length,
@@ -34,10 +34,18 @@ function GardensPage() {
                 };
             })
         );
-
+    
+        // Ordenar jardines: Primero por distrito (alfabéticamente), luego por número de jardín (ascendente)
+        updatedData.sort((a, b) => {
+            if (a.gardenDistrict < b.gardenDistrict) return -1;
+            if (a.gardenDistrict > b.gardenDistrict) return 1;
+            return a.gardenNumber - b.gardenNumber;
+        });
+    
         setGardens(updatedData);
         setGardensData(updatedData);
     };
+    
 
     useEffect(() => {
         fetchGardensWithRatings();
